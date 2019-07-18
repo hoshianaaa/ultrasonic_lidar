@@ -13,6 +13,12 @@ void flash() {
   digitalWrite(servo, LOW);
 }
 
+void servo_write(int ang){
+  //180 ~ 0 deg ==== 600 ~ 2400 ms
+  int pulse = map(ang,180,0,600,2400);
+  servo_pulse_ = pulse;
+}
+
 void setup() {
   Serial.begin(9600);
 
@@ -22,8 +28,5 @@ void setup() {
 }
 
 void loop() {
-  servo_pulse_ = 600;//180 deg
-  delay(1000);
-  servo_pulse_ = 2400;//0 deg
-  delay(1000);
+  
 }
