@@ -11,8 +11,12 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  // SG-5010の制御パルス:0.5~2.4ms
-  // ServoLibrary
+  // SG-5010
+  //制御パルス:0.5~2.4ms
+  //pwmサイクル:20ms
+  
+  // ServoLibrary:1~2ms->使えない
+  
   
   myServo.write(180);
   
