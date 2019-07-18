@@ -5,7 +5,7 @@
 #include <FlexiTimer2.h>
 
 const int servo = 3;
-int servo_pulse_ = 0;
+volatile int servo_pulse_ = 0;//最適化を防ぐためvolatileをつける
 
 void flash() {
   digitalWrite(servo, HIGH);
@@ -22,10 +22,8 @@ void setup() {
 }
 
 void loop() {
-  servo_pulse_ = 500;
-  Serial.println(servo_pulse_);
+  servo_pulse_ = 600;//180 deg
   delay(1000);
-  servo_pulse_ = 2400;
-  Serial.println(servo_pulse_);
+  servo_pulse_ = 2400;//0 deg
   delay(1000);
 }
