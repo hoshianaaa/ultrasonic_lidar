@@ -7,8 +7,7 @@
 //**** parameter *****//
 
 const int delay_time_ = 0;//1deg間のdelay_time
-const int data_count_ = 3;//1degに対するスキャンの回数
-const float low_pass_ = 0.9;//高いほどノイズが減る(0~1.0)
+const int data_count_ = 1;//1degに対するスキャンの回数
 
 ////////////////////////
 
@@ -54,11 +53,6 @@ void setup() {
   FlexiTimer2::start();
 }
 
-int low_pass_filter(int input){
-  static int data;
-  data = data * low_pass_ + input * (1 - low_pass_);
-  return data;
-}
 
 void loop() {
 
@@ -72,7 +66,7 @@ void loop() {
     //Serial.print(i);
     //Serial.print(" ");
     data = get_distance();
-    Serial.println(low_pass_filter(data));
+    Serial.println(data);
     delay(10);
   }
   while (1);
