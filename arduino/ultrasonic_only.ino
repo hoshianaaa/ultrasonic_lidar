@@ -17,14 +17,17 @@ int get_distance() {
   // 超音波を出力終了
   digitalWrite(trig, LOW);
   // 出力した超音波が返って来る時間を計測
-  int t = pulseIn(echo, HIGH);  //4000~6000us
+  long int t = pulseIn(echo, HIGH, 23500);  //4000~6000us  4m:23500us 
+  
   // 計測した時間と音速から反射物までの距離を計算
+  Serial.print("timt(us):");
+  Serial.println(t);
   return  t * 0.17;
 }
 
 void loop() {
 
-  Serial.print(get_distance());
+  Serial.println(get_distance());
   delay(500);
   
 }
