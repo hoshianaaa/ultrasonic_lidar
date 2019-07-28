@@ -6,7 +6,7 @@
 
 //**** parameter *****//
 
-const int delay_time_ = 0;//1deg間のdelay_time
+const int delay_time_ = 150;//サーボの角度を変更した後のdelay時間
 const int data_count_ = 1;//1degに対するスキャンの回数
 
 ////////////////////////
@@ -26,6 +26,7 @@ void servo_write(int ang) {
   //180 ~ 0 deg ==== 600 ~ 2400 ms
   int pulse = map(ang, 180, 0, 600, 2400);
   servo_pulse_ = pulse;
+  delay(delay_time_);
 }
 
 int get_distance() {
@@ -37,7 +38,7 @@ int get_distance() {
     digitalWrite(trig, HIGH);
     delayMicroseconds(11);
     digitalWrite(trig, LOW);
-    t = t + pulseIn(echo, HIGH, 10000); //4000~6000us
+    t = t + pulseIn(echo, HIGH, 23500); //4000~6000us 4m:23500us
   }
   return  t / data_count_ * 0.17;
 }
@@ -62,12 +63,11 @@ void loop() {
   delay(1000);
 
   for (int i = 0; i < 181; i++) {
+    data = get_distance();
     servo_write(i);
     //Serial.print(i);
     //Serial.print(" ");
-    data = get_distance();
     Serial.println(data);
-    delay(10);
   }
   while (1);
 }
